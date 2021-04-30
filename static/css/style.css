@@ -1,0 +1,55 @@
+body {
+  background: #87CEEB;
+  margin: 0 0 0 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav {
+  overflow: hidden;
+  background: #23B0E8;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #23B0E8;
+}
+
+.nav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.welcome {
+  text-align: center;
+  font-weight: 900;
+  font-size: x-large;
+  background: #23B0E8;
+  border-radius: 1em;
+  max-width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding: 1%;
+  margin-top: 12%;
+}
+
+.welcome button {
+  background: none;
+  border: none;
+}
+
+.welcome img {
+  max-width: 75%;
+}
