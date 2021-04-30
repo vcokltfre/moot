@@ -6,3 +6,4 @@ services:
     restart: always
     ports:
       - 1991:8000
+    env_file: .env
