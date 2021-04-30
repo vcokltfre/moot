@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  moot:
+    build: .
+    restart: always
+    ports:
+      - 1991:8000
