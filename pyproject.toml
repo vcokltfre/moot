@@ -8,6 +8,8 @@ authors = ["vcokltfre <vcokltfre@gmail.com>"]
 python = "^3.8"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.4"
+Jinja2 = "^2.11.3"
+aiofiles = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 
