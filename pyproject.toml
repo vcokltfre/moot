@@ -11,6 +11,8 @@ uvicorn = "^0.13.4"
 Jinja2 = "^2.11.3"
 aiofiles = "^0.6.0"
 python-dotenv = "^0.17.1"
+aiohttp = "^3.7.4"
+itsdangerous = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 
