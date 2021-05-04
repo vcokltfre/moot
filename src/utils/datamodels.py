@@ -15,6 +15,10 @@ class User:
     banned: bool
     flags: int
 
+    @property
+    def avatar_url(self) -> str:
+        return f"https://cdn.discordapp.com/avatars/{self.id}/{self.avatar_hash}"
+
 
 @dataclass
 class Moot:
