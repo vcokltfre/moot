@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS Moots (
     flags           BIGINT NOT NULL DEFAULT 0
 );
 
+ALTER TABLE Moots ADD CONSTRAINT content_check CHECK (char_length(content) >= 280);
+
 CREATE TABLE IF NOT EXISTS UserSessions (
     token           VARCHAR(255) NOT NULL PRIMARY KEY,
     author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
