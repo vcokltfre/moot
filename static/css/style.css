@@ -81,6 +81,9 @@ body {
 
 .moot .content {
   padding-left: 10px;
+  padding-right: 10px;
+  max-width: 85%;
+  word-wrap: break-word;
 }
 
 .moot .content h1 {
