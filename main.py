@@ -35,6 +35,16 @@ async def attach(request: Request, call_next) -> Response:
 
     return await call_next(request)
 
+@app.middleware("http")
+async def authorize(request: Request, call_next) -> Response:
+    """Authorize the request."""
+
+    session = request.cookies.get("moot_session_token", "")
+
+    request.state.auth = await db.get_auth(session)
+
+    return await call_next(request)
+
 @app.get("/ping")
 async def ping() -> dict:
     """Get a static ping response showing the site is online."""
