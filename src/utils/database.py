@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from asyncpg import create_pool, Pool
 
-from .datamodels import User, Session
+from .datamodels import User, Session, AuthState
 
 
 class Database:
@@ -110,3 +110,21 @@ class Database:
             user = await self.create_user(user_id, username, avatar)
 
         return await self.create_session(token_hex(64), user.id, expires)
+
+    async def get_auth(self, token: str) -> AuthState:
+        """Get a user's authentication state.
+
+        Args:
+            token (str): The user's session token.
+
+        Returns:
+            AuthState: The user's authentication state.
+        """
+
+        session = await self.get_session(token)
+        if not session:
+            return AuthState()
+
+        user = await self.get_user(session.author_id)
+
+        return AuthState(user, session)
