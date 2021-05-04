@@ -87,7 +87,7 @@ class Database:
             Session: The session object created.
         """
 
-        created_session = await self.pool.fetchrow("INSERT INTO UserSessions (token, author_id, exppires) VALUES ($1, $2, $3) RETURNING *;", token, user, expires)
+        created_session = await self.pool.fetchrow("INSERT INTO UserSessions (token, author_id, expires) VALUES ($1, $2, $3) RETURNING *;", token, user, expires)
 
         return User(**dict(created_session))
 
