@@ -1,11 +1,11 @@
 from os import getenv
-from typing import Optional
 from secrets import token_hex
+from typing import Optional, List
 from datetime import datetime, timedelta
 
 from asyncpg import create_pool, Pool
 
-from .datamodels import User, Session, AuthState
+from .datamodels import User, Session, AuthState, Moot
 
 
 class Database:
@@ -128,3 +128,51 @@ class Database:
         user = await self.get_user(session.author_id)
 
         return AuthState(user, session)
+
+    async def get_moot(self, id: int) -> Optional[Moot]:
+        """Get a specific Moot by ID.
+
+        Args:
+            id (int): The ID to fetch the Moot for.
+
+        Returns:
+            Optional[Moot]: The Moot object.
+        """
+
+        raw_moot = await self.pool.fetchrow("SELECT * FROM Moots WHERE id = $1;", id)
+
+        if not raw_moot:
+            return None
+
+        return Moot(**dict(raw_moot))
+
+    async def get_recent_moots(self, userid: int, number: int) -> List[Moot]:
+        """Get the most recent moots from a user.
+
+        Args:
+            userid (int): The user's ID to query Moots from.
+            number (int): The max number of Moots to return.
+
+        Returns:
+            List[Moot]: The list of Moots.
+        """
+
+        moots = await self.pool.fetch("SELECT * FROM Moots WHERE author_id = $1 ORDER BY id DESC LIMIT $2;", userid, number)
+
+        return [Moot(**dict(raw_moot)) for raw_moot in moots]
+
+    async def create_moot(self, id: int, author_id: int, content: str) -> Moot:
+        """Create a new Moot.
+
+        Args:
+            id (int): The ID of the Moot to create.
+            author_id (int): The author of the Moot's ID.
+            content (str): The content of the moot.
+
+        Returns:
+            Moot: The created Moot object.
+        """
+
+        created_moot = await self.pool.fetchrow("INSERT INTO Moots (id, author_id, content) VALUES ($1, $2, $3) RETURNING *;", id, author_id, content)
+
+        return Moot(**dict(created_moot))
