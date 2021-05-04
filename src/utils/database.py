@@ -89,7 +89,7 @@ class Database:
 
         created_session = await self.pool.fetchrow("INSERT INTO UserSessions (token, author_id, expires) VALUES ($1, $2, $3) RETURNING *;", token, user, expires)
 
-        return User(**dict(created_session))
+        return Session(**dict(created_session))
 
     async def user_login(self, user_id: int, username: str, avatar: str) -> Session:
         """Execute the full user login process.
