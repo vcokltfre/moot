@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS Users (
+    id              BIGINT NOT NULL PRIMARY KEY,
+    username        VARCHAR(255) NOT NULL UNIQUE,
+    avatar_hash     VARCHAR(255),
+    bio             TEXT DEFAULT NULL,
+    banned          BOOLEAN NOT NULL DEFAULT FALSE,
+    flags           BIGINT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS Moots (
+    id              BIGINT NOT NULL PRIMARY KEY,
+    author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
+    content         TEXT NOT NULL,
+    reference       BIGINT DEFAULT NULL,
+    hide            BOOLEAN NOT NULL DEFAULT FALSE,
+    flags           BIGINT NOT NULL
+);
