@@ -15,3 +15,9 @@ CREATE TABLE IF NOT EXISTS Moots (
     hide            BOOLEAN NOT NULL DEFAULT FALSE,
     flags           BIGINT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS UserSesions (
+    token           VARCHAR(255) NOT NULL PRIMARY KEY,
+    author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
+    expires         TIMESTAMP NOT NULL
+);
