@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Moots (
     content         TEXT NOT NULL,
     reference       BIGINT DEFAULT NULL,
     hide            BOOLEAN NOT NULL DEFAULT FALSE,
-    flags           BIGINT NOT NULL
+    flags           BIGINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS UserSessions (
