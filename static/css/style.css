@@ -26,6 +26,10 @@ body {
   text-decoration: none;
 }
 
+.nav img {
+  height: 3em;
+}
+
 .sticky {
   position: fixed;
   top: 0;

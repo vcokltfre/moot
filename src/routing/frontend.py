@@ -16,8 +16,10 @@ async def get_index(request: Request) -> HTMLResponse:
     if not auth.user:
         return auth.request_auth()
 
-    print(auth)
+    user = auth.user
 
     return templates.TemplateResponse("index.html", {
         "request": request,
+        "username": user.username,
+        "userid": user.id,
     })
