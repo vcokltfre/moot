@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Moots (
     flags           BIGINT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS UserSesions (
+CREATE TABLE IF NOT EXISTS UserSessions (
     token           VARCHAR(255) NOT NULL PRIMARY KEY,
     author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
     expires         TIMESTAMP NOT NULL
