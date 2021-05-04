@@ -146,18 +146,19 @@ class Database:
 
         return Moot(**dict(raw_moot))
 
-    async def get_recent_moots(self, userid: int, number: int) -> List[Moot]:
+    async def get_recent_moots(self, userid: int, number: int, offset: int = 0) -> List[Moot]:
         """Get the most recent moots from a user.
 
         Args:
             userid (int): The user's ID to query Moots from.
             number (int): The max number of Moots to return.
+            offset (int): The offset to fetch Moots at. Defaults to 0.
 
         Returns:
             List[Moot]: The list of Moots.
         """
 
-        moots = await self.pool.fetch("SELECT * FROM Moots WHERE author_id = $1 ORDER BY id DESC LIMIT $2;", userid, number)
+        moots = await self.pool.fetch("SELECT * FROM Moots WHERE author_id = $1 ORDER BY id DESC LIMIT $2 OFFSET $3;", userid, number, offset)
 
         return [Moot(**dict(raw_moot)) for raw_moot in moots]
 
