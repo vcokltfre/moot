@@ -6,6 +6,7 @@ from aiohttp import ClientSession
 from fastapi.staticfiles import StaticFiles
 
 from src.routing import frontend_router, api_router
+from src.utils.database import Database
 
 
 if not getenv("IN_DOCKER"):
@@ -17,12 +18,20 @@ app.include_router(frontend_router)
 app.include_router(api_router)
 
 session = ClientSession()
+db = Database()
+
+@app.on_event("startup")
+async def on_startup() -> None:
+    """Connect the database on startup."""
+
+    await db.ainit()
 
 @app.middleware("http")
 async def attach(request: Request, call_next) -> Response:
-    """Attach the ClientSession to requests."""
+    """Attach the ClientSession and database to requests."""
 
     request.state.session = session
+    request.state.db = db
 
     return await call_next(request)
 
