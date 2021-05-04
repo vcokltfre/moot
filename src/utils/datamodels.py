@@ -1,4 +1,5 @@
 from typing import Optional
+from datetime import datetime
 from dataclasses import dataclass
 
 
@@ -20,3 +21,10 @@ class Moot:
     reference: Optional[int]
     hide: bool
     flags: int
+
+
+@dataclass
+class Session:
+    token: str
+    author_id: int
+    expires: datetime
