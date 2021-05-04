@@ -1,6 +1,7 @@
 from os import getenv
 from typing import Optional
-from datetime import datetime
+from secrets import token_hex
+from datetime import datetime, timedelta
 
 from asyncpg import create_pool, Pool
 
@@ -89,3 +90,23 @@ class Database:
         created_session = await self.pool.fetchrow("INSERT INTO UserSessions (token, author_id, exppires) VALUES ($1, $2, $3) RETURNING *;", token, user, expires)
 
         return User(**dict(created_session))
+
+    async def user_login(self, user_id: int, username: str, avatar: str) -> Session:
+        """Execute the full user login process.
+
+        Args:
+            user_id (int): The user ID to log in.
+            username (str): The user's username.
+            avatar (str): The user's avatar.
+
+        Returns:
+            Session: The user's logged in session.
+        """
+
+        expires = datetime.utcnow() + timedelta(days=14)
+
+        user = await self.get_user(user_id)
+        if not user:
+            user = await self.create_user(user_id, username, avatar)
+
+        return await self.create_session(token_hex(64), user.id, expires)
