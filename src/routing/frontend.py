@@ -23,3 +23,21 @@ async def get_index(request: Request) -> HTMLResponse:
         "username": user.username,
         "userid": user.id,
     })
+
+@router.get("/users/{userid}")
+async def get_userpage(userid: int, request: Request) -> HTMLResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    moots = await request.state.db.get_recent_moots(user.id, 15)
+
+    return templates.TemplateResponse("user.html", {
+        "request": request,
+        "username": user.username,
+        "avatar": f"https://cdn.discordapp.com/avatars/{user.id}/{user.avatar_hash}",
+        "moots": [moot.content for moot in moots],
+    })

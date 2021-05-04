@@ -57,3 +57,32 @@ body {
 .welcome img {
   max-width: 75%;
 }
+
+.moots {
+  margin: auto;
+  width: 35%;
+  padding: 10px;
+  border-radius: 24px;
+}
+
+.moot {
+  background: #057aa8;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.moot .avatar {
+  display: flex;
+  flex-direction: column;
+  width: 4em;
+}
+
+.moot .content {
+  padding-left: 10px;
+}
+
+.moot .content h1 {
+  line-height: 0.5;
+}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="main">
+  <div class="moots">
+    {% for moot in moots -%}
+      <div class="moot">
+        <div class="avatar">
+          <img src="{{ avatar }}">
+        </div>
+        <div class="content">
+          <h1>{{ username }}</h1>
+
+          <p1>{{ moot }}</p1>
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+</div>
+{% endblock %}
