@@ -1,6 +1,9 @@
+from os import getenv
 from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
+
+from fastapi.responses import RedirectResponse
 
 
 @dataclass
@@ -34,3 +37,6 @@ class Session:
 class AuthState:
     user: User = field(default=None)
     session: Session = field(default=None)
+
+    def request_auth(self) -> RedirectResponse:
+        return RedirectResponse(getenv("OAUTH_URL"))
