@@ -9,9 +9,15 @@ router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/login")
+@router.get("/")
 async def get_index(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse("login.html", {
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    print(auth)
+
+    return templates.TemplateResponse("index.html", {
         "request": request,
-        "discord_oauth": getenv("OAUTH_URL"),
     })
