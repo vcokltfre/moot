@@ -13,7 +13,7 @@
     <div class="nav">
       <ul>
         <li><a href="/">Home</a></li>
-        <li style="float: right"><a href="/users/{{ userid }}">{{ username }}</a><img src="https://cdn.discordapp.com/avatars/297045071457681409/a_bb9a917f8e4d447004395e54a0436a01.gif"></li>
+        <li style="float: right"><a href="/users/{{ userid }}">{{ username|e }}</a><img src="https://cdn.discordapp.com/avatars/297045071457681409/a_bb9a917f8e4d447004395e54a0436a01.gif"></li>
       </ul> <!-- TODO: Navbar -->
     </div>
     <div class="content">{% block content %}{% endblock %}</div>
