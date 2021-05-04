@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from aiohttp import ClientSession
 from fastapi.staticfiles import StaticFiles
 
-from src.routing import frontend_router
+from src.routing import frontend_router, api_router
 
 
 if not getenv("IN_DOCKER"):
@@ -14,6 +14,7 @@ if not getenv("IN_DOCKER"):
 app = FastAPI(docs_url=None, redoc_url=None, apoenapi_url=None)
 app.mount("/static", StaticFiles(directory="static"), "static")
 app.include_router(frontend_router)
+app.include_router(api_router)
 
 session = ClientSession()
 
