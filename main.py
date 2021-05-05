@@ -5,8 +5,9 @@ from dotenv import load_dotenv
 from aiohttp import ClientSession
 from fastapi.staticfiles import StaticFiles
 
-from src.routing import frontend_router, api_router
+from src.utils.ids import IDGenerator
 from src.utils.database import Database
+from src.routing import frontend_router, api_router
 
 
 if not getenv("IN_DOCKER"):
@@ -19,6 +20,7 @@ app.include_router(api_router)
 
 session = ClientSession()
 db = Database()
+ids = IDGenerator()
 
 @app.on_event("startup")
 async def on_startup() -> None:
@@ -28,10 +30,11 @@ async def on_startup() -> None:
 
 @app.middleware("http")
 async def attach(request: Request, call_next) -> Response:
-    """Attach the ClientSession and database to requests."""
+    """Attach the ClientSession, database and idgen to requests."""
 
     request.state.session = session
     request.state.db = db
+    request.state.ids = ids
 
     return await call_next(request)
 
