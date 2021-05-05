@@ -55,6 +55,13 @@ nav {
     color: #f2f2f2;
     text-align: center;
     text-decoration: none;
+
+    img {
+      padding: 0 .5rem;
+      height: 3rem;
+      width: auto;
+      border-radius: 50%;
+    }
   }
 
   .user {
