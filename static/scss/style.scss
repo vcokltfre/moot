@@ -1,0 +1,157 @@
+$color_background: hsl(0, 0%, 12%);
+$color_background_accent: darken($color_background, 5%);
+$color_foreground: hsl(197, 71%, 73%);
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color: $color_foreground;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
+  background: $color_background;
+  margin: 0;
+}
+
+nav {
+  padding: .75rem;
+  background: $color_background_accent;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    flex-grow: 1;
+  }
+
+  a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+
+    span {}
+    img {
+      padding: 0 .5rem;
+      height: 3rem;
+      width: auto;
+      border-radius: 50%;
+    }
+  }
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.welcome {
+  text-align: center;
+  font-weight: 900;
+  font-size: x-large;
+  background-color: $color_background_accent;
+  border-radius: 1em;
+  max-width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding: 1%;
+  margin-top: 12%;
+
+  button {
+    background: none;
+    border: none;
+  }
+
+  img {
+    max-width: 75%;
+  }
+}
+
+
+
+.moots {
+  margin: auto;
+  padding: 10px;
+  border-radius: 24px;
+
+  @include tablet() {
+    width: 95%;
+  }
+
+  @include desktop() {
+    width: 50%;
+  }
+}
+
+.moot {
+  background: $color_background_accent;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 10px;
+
+  .moot-header {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    .avatar {
+      display: inline-block;
+      vertical-align: middle;
+      padding-right: .5rem;
+
+      img {
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+      }
+    }
+
+    .username {
+      font-size: 1.5rem;
+    }
+  }
+
+  .content {
+    padding: 0 1rem;
+    word-wrap: break-word;
+
+    h1 {
+      line-height: 0.5;
+    }
+  }
+
+  transition: box-shadow 300ms, transform 5s;
+  &:hover {
+    box-shadow: .01rem .01rem .1rem darken($color_background_accent, 10%);
+  }
+}

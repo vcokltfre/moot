@@ -1,33 +1,48 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color: #89cfeb;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
 body {
-  background: #87CEEB;
-  margin: 0 0 0 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  background: #1f1f1f;
+  margin: 0;
 }
 
-.nav {
-  overflow: hidden;
-  background: #23B0E8;
+nav {
+  padding: 0.75rem;
+  background: #121212;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
 }
-
-.nav ul {
+nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: #23B0E8;
+  flex-grow: 1;
 }
-
-.nav a {
+nav a {
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px;
   text-decoration: none;
 }
-
-.nav img {
-  height: 3em;
+nav .user {
+  display: flex;
+  align-items: center;
+}
+nav .user img {
+  padding: 0 0.5rem;
+  height: 3rem;
+  width: auto;
+  border-radius: 50%;
 }
 
 .sticky {
@@ -40,7 +55,7 @@ body {
   text-align: center;
   font-weight: 900;
   font-size: x-large;
-  background: #23B0E8;
+  background-color: #121212;
   border-radius: 1em;
   max-width: 30%;
   margin-left: 35%;
@@ -48,44 +63,63 @@ body {
   padding: 1%;
   margin-top: 12%;
 }
-
 .welcome button {
   background: none;
   border: none;
 }
-
 .welcome img {
   max-width: 75%;
 }
 
 .moots {
   margin: auto;
-  width: 35%;
   padding: 10px;
   border-radius: 24px;
 }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .moots {
+    width: 95%;
+  }
+}
+@media (min-width: 1024px) {
+  .moots {
+    width: 50%;
+  }
+}
 
 .moot {
-  background: #057aa8;
+  background: #121212;
   border-radius: 16px;
   padding: 16px;
-  display: flex;
   margin-bottom: 10px;
+  transition: box-shadow 300ms, transform 5s;
 }
-
-.moot .avatar {
-  display: flex;
-  flex-direction: column;
-  width: 4em;
+.moot .moot-header {
+  padding-top: 1rem;
+  padding-left: 1rem;
 }
-
+.moot .moot-header .avatar {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 0.5rem;
+}
+.moot .moot-header .avatar img {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}
+.moot .moot-header .username {
+  font-size: 1.5rem;
+}
 .moot .content {
-  padding-left: 10px;
-  padding-right: 10px;
-  max-width: 85%;
+  padding: 0 1rem;
   word-wrap: break-word;
 }
-
 .moot .content h1 {
   line-height: 0.5;
 }
+.moot:hover {
+  box-shadow: 0.01rem 0.01rem 0.1rem black;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -8,14 +8,16 @@
   <div class="moots">
     {% for moot in moots -%}
       <div class="moot">
-        <div class="avatar">
-          <img src="{{ avatar }}">
+        <div class="moot-header">
+          <div class="avatar">
+            <img src="{{ avatar_url }}">
+          </div>
+          <span class="username">{{ username }}</span>
         </div>
-        <div class="content">
-          <h1>{{ username }}</h1>
-
-          <p1>{{ moot }}</p1>
-        </div>
+        
+        <p class="content">
+          {{ moot }}
+        </p>
       </div>
     {%- endfor %}
   </div>
