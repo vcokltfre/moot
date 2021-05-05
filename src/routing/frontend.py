@@ -38,6 +38,9 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 
     for moot in moots:
         moot.date = get_datetime(moot.id).strftime("%Y-%m-%d at %H:%M:%S")
+        moot.username = user.username
+        moot.avatar_url = user.avatar_url
+        moot.userid = user.id
 
     return templates.TemplateResponse("user.html", {
         "request": request,
