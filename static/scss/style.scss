@@ -106,6 +106,12 @@ nav {
   .moot-header {
     padding-top: 1rem;
     padding-left: 1rem;
+
+    a {
+      text-decoration: none;
+      color: $color_foreground;
+    }
+
     .avatar {
       display: inline-block;
       vertical-align: middle;

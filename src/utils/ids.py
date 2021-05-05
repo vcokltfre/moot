@@ -1,4 +1,5 @@
 from time import time
+from datetime import datetime
 
 
 class IDGenerator():
@@ -16,3 +17,9 @@ def decode_sf(sf: int) -> tuple:
   w = (sf & ((1 << 14) - 1)) >> 6   # Worker ID
   i = (sf & ((1 << 6) - 1)) >> 0    # Increment
   return (t, w, i)
+
+
+def get_datetime(sf: int) -> datetime:
+    timestamp, _, __ = decode_sf(sf)
+
+    return datetime.fromtimestamp((timestamp + 1609459200000) / 1000)

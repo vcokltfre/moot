@@ -9,16 +9,18 @@
     {% for moot in moots -%}
       <div class="moot">
         <div class="moot-header">
-          <div class="avatar">
-            <img src="{{ avatar_url }}">
-          </div>
-          <span class="username">{{ username }}</span>
+          <a href="/users/{{ userid }}">
+            <div class="avatar">
+              <img src="{{ avatar_url }}">
+            </div>
+            <span class="username">{{ username }}</span>
+          </a>
         </div>
         <p class="content">
-          {{ moot }}
+          {{ moot.content }}
         </p>
         <p class="length">
-          Moot length: {{ moot|length }}
+          Moot length: {{ moot.content|length }} -- {{ moot.date }}
         </p>
       </div>
     {%- endfor %}

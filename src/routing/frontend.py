@@ -1,8 +1,8 @@
-from os import getenv
-
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+
+from src.utils.ids import get_datetime
 
 
 router = APIRouter()
@@ -36,10 +36,13 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 
     moots = await request.state.db.get_recent_moots(userid, 15)
 
+    for moot in moots:
+        moot.date = get_datetime(moot.id).strftime("%Y-%m-%d at %H:%M:%S")
+
     return templates.TemplateResponse("user.html", {
         "request": request,
         "username": user.username,
         "userid": user.id,
         "avatar_url": user.avatar_url,
-        "moots": [moot.content for moot in moots],
+        "moots": [moot for moot in moots],
     })
