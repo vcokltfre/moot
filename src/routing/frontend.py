@@ -34,7 +34,7 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 
     user = auth.user
 
-    moots = await request.state.db.get_recent_moots(user.id, 15)
+    moots = await request.state.db.get_recent_moots(userid, 15)
 
     return templates.TemplateResponse("user.html", {
         "request": request,
