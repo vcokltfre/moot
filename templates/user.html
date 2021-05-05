@@ -14,9 +14,11 @@
           </div>
           <span class="username">{{ username }}</span>
         </div>
-        
         <p class="content">
           {{ moot }}
+        </p>
+        <p class="length">
+          Moot length: {{ moot|length }}
         </p>
       </div>
     {%- endfor %}

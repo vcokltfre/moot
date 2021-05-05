@@ -57,26 +57,6 @@ nav .user img {
   width: 100%;
 }
 
-.welcome {
-  text-align: center;
-  font-weight: 900;
-  font-size: x-large;
-  background-color: #121212;
-  border-radius: 1em;
-  max-width: 30%;
-  margin-left: 35%;
-  margin-right: 35%;
-  padding: 1%;
-  margin-top: 12%;
-}
-.welcome button {
-  background: none;
-  border: none;
-}
-.welcome img {
-  max-width: 75%;
-}
-
 .moots {
   margin: auto;
   padding: 10px;
@@ -123,6 +103,10 @@ nav .user img {
 }
 .moot .content h1 {
   line-height: 0.5;
+}
+.moot .length {
+  padding: 0 1rem;
+  color: #16759b;
 }
 .moot:hover {
   box-shadow: 0.01rem 0.01rem 0.1rem black;

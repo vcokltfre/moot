@@ -83,30 +83,6 @@ nav {
   width: 100%;
 }
 
-.welcome {
-  text-align: center;
-  font-weight: 900;
-  font-size: x-large;
-  background-color: $color_background_accent;
-  border-radius: 1em;
-  max-width: 30%;
-  margin-left: 35%;
-  margin-right: 35%;
-  padding: 1%;
-  margin-top: 12%;
-
-  button {
-    background: none;
-    border: none;
-  }
-
-  img {
-    max-width: 75%;
-  }
-}
-
-
-
 .moots {
   margin: auto;
   padding: 10px;
@@ -154,6 +130,11 @@ nav {
     h1 {
       line-height: 0.5;
     }
+  }
+
+  .length {
+    padding: 0 1rem;
+    color: #16759b;
   }
 
   transition: box-shadow 300ms, transform 5s;
