@@ -1,18 +1,18 @@
 {% macro makemoot(moot) %}
 <div class="moot">
   <div class="moot-header">
-    <a href="/users/{{ moot.userid }}">
+    <a href="/users/{{ moot.user.userid }}">
       <div class="avatar">
-        <img src="{{ moot.avatar_url }}">
+        <img src="{{ moot.user.avatar_url }}">
       </div>
-      <span class="username">{{ moot.username }}</span>
+      <span class="username">{{ moot.user.username }}</span>
     </a>
   </div>
   <p class="content">
-    {{ moot.content }}
+    {{ moot.moot.content }}
   </p>
   <p class="length">
-    Moot length: {{ moot.content|length }} -- {{ moot.date }}
+    Moot length: {{ moot.moot.content|length }} -- {{ moot.moot.human_time }}
   </p>
 </div>
 {% endmacro %}

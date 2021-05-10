@@ -5,6 +5,8 @@ from dataclasses import dataclass, field
 
 from fastapi.responses import RedirectResponse
 
+from .ids import get_datetime
+
 
 @dataclass
 class User:
@@ -29,6 +31,10 @@ class Moot:
     hide: bool
     flags: int
 
+    @property
+    def human_time(self) -> str:
+        return get_datetime(self.id).strftime("%Y-%m-%d at %H:%M:%S")
+
 
 @dataclass
 class Session:
@@ -44,3 +50,9 @@ class AuthState:
 
     def request_auth(self) -> RedirectResponse:
         return RedirectResponse(getenv("OAUTH_URL"))
+
+
+@dataclass
+class ResolvedMoot:
+    user: User
+    moot: Moot
