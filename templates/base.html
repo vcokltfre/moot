@@ -34,4 +34,30 @@
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 5000);
   }
+
+  function del(moot) {
+    fetch(`/moots/${moot}`, {
+      method: "DELETE"
+    }).then((resp) => {
+      if (resp.status == 200) {
+        betterAlert("Post deleted successfully.");
+        document.getElementById(moot).remove();
+      } else {
+        betterAlert("Oh no! Something went wrong while processing your request!")
+      }
+    })
+  }
+
+  function hide(moot) {
+    fetch(`/moots/${moot}`, {
+      method: "PATCH"
+    }).then((resp) => {
+      if (resp.status == 200) {
+        betterAlert("Post hidden successfully.");
+        document.getElementById(`content-${moot}`).innerText = "The content of this post has been hidden by the Moot moderation team.";
+      } else {
+        betterAlert("Oh no! Something went wrong while processing your request!")
+      }
+    })
+  }
 </script>
