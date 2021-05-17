@@ -19,11 +19,16 @@ async def get_index(request: Request) -> HTMLResponse:
 
     user = auth.user
 
+    moots = await request.state.db.get_all_recent_moots(15)
+    users = await request.state.db.get_users(list(set([moot.author_id for moot in moots])))
+    users = {user.id: user for user in users}
+
     return templates.TemplateResponse("index.html", {
         "request": request,
         "username": user.username,
         "userid": user.id,
         "avatar_url": user.avatar_url,
+        "moots": [ResolvedMoot(users[moot.author_id], moot) for moot in moots],
     })
 
 @router.get("/users/{userid}")

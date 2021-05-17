@@ -162,6 +162,35 @@ class Database:
 
         return [Moot(**dict(raw_moot)) for raw_moot in moots]
 
+    async def get_all_recent_moots(self, number: int, offset: int = 0) -> List[Moot]:
+        """Get the most recent moots.
+
+        Args:
+            number (int): The max number of Moots to return.
+            offset (int): The offset to fetch Moots at. Defaults to 0.
+
+        Returns:
+            List[Moot]: The list of Moots.
+        """
+
+        moots = await self.pool.fetch("SELECT * FROM Moots ORDER BY id DESC LIMIT $1 OFFSET $2;", number, offset)
+
+        return [Moot(**dict(raw_moot)) for raw_moot in moots]
+
+    async def get_users(self, ids: List[int]) -> List[User]:
+        """Get a user from the database.
+
+        Args:
+            ids (List[int]): The user IDs to look up.
+
+        Returns:
+            List[User]: The user objects.
+        """
+
+        raw_users = await self.pool.fetch("SELECT * FROM Users WHERE id = any($1::bigint[]);", tuple(ids))
+
+        return [User(**dict(raw_user)) for raw_user in raw_users]
+
     async def create_moot(self, id: int, author_id: int, content: str) -> Moot:
         """Create a new Moot.
 
