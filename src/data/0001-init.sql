@@ -23,3 +23,9 @@ CREATE TABLE IF NOT EXISTS UserSessions (
     author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
     expires         TIMESTAMP NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS APIAuth (
+    token           VARCHAR(255) NOT NULL PRIMARY KEY,
+    author_id       BIGINT NOT NULL REFERENCES Users (id) ON DELETE CASCADE,
+    flags           BIGINT NOT NULL DEFAULT 0
+);
