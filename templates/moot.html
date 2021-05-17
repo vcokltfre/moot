@@ -1,4 +1,4 @@
-{% macro makemoot(moot) %}
+{% macro makemoot(moot, logged_in_user) %}
 <div class="moot">
   <div class="moot-header">
     <a href="/users/{{ moot.user.id }}">
@@ -17,7 +17,7 @@
     Moot length: {{ moot.moot.content|length }} --
     {{ moot.moot.human_time }} --
     <span><a href="/moots/{{ moot.moot.id }}">Direct Link</a></span>
-    {%- if moot.user.admin %}
+    {%- if logged_in_user.admin %}
     -- <button onclick="del('{{ moot.moot.id }}')">Delete</button>
     -- <button onclick="hide('{{ moot.moot.id }}')">Hide</button>
     {% endif -%}

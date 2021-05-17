@@ -25,9 +25,7 @@ async def get_index(request: Request) -> HTMLResponse:
 
     return templates.TemplateResponse("index.html", {
         "request": request,
-        "username": user.username,
-        "userid": user.id,
-        "avatar_url": user.avatar_url,
+        "user": user,
         "moots": [ResolvedMoot(users[moot.author_id], moot) for moot in moots],
     })
 
@@ -44,9 +42,7 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 
     return templates.TemplateResponse("user.html", {
         "request": request,
-        "username": user.username,
-        "userid": user.id,
-        "avatar_url": user.avatar_url,
+        "user": user,
         "moots": [ResolvedMoot(moot_user, moot) for moot in moots],
     })
 
@@ -70,9 +66,7 @@ async def get_userpage(id: int, request: Request) -> HTMLResponse:
 
     return templates.TemplateResponse("viewmoot.html", {
         "request": request,
-        "username": user.username,
-        "userid": user.id,
-        "avatar_url": user.avatar_url,
+        "user": user,
         "moot": ResolvedMoot(user, moot),
     })
 
@@ -115,9 +109,7 @@ async def new(request: Request) -> HTMLResponse:
 
     return templates.TemplateResponse("new.html", {
         "request": request,
-        "username": user.username,
-        "userid": user.id,
-        "avatar_url": user.avatar_url,
+        "user": user,
     })
 
 @router.post("/new/post")

@@ -8,7 +8,7 @@
 <div class="welcome">
   <div class="moots">
     {% for moot in moots -%}
-      {{ makemoot(moot) }}
+      {{ makemoot(moot, user) }}
     {%- endfor %}
   </div>
 </div>

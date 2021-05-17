@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from 'moot.html' import makemoot %}
-{% block title %}{{ username }}{% endblock %}
+{% block title %}{{ user.username }}{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
@@ -8,7 +8,7 @@
 <div class="main">
   <div class="moots">
     {% for moot in moots -%}
-      {{ makemoot(moot) }}
+      {{ makemoot(moot, user) }}
     {%- endfor %}
   </div>
 </div>
