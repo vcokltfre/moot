@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from 'moot.html' import makemoot %}
+{% block title %}{{ username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="main">
+  <div class="moots">
+    {{ makemoot(moot) }}
+  </div>
+</div>
+{% endblock %}

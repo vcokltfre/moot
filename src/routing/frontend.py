@@ -44,6 +44,24 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
         "moots": [ResolvedMoot(user, moot) for moot in moots],
     })
 
+@router.get("/moots/{id}")
+async def get_userpage(id: int, request: Request) -> HTMLResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    moot = await request.state.db.get_moot(id)
+    user = await request.state.db.get_user(moot.author_id)
+
+    return templates.TemplateResponse("viewmoot.html", {
+        "request": request,
+        "username": user.username,
+        "userid": user.id,
+        "avatar_url": user.avatar_url,
+        "moot": ResolvedMoot(user, moot),
+    })
+
 @router.get("/new")
 async def new(request: Request) -> HTMLResponse:
     auth = request.state.auth
