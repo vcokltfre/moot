@@ -100,7 +100,6 @@ async def hide_moot(id: int, request: Request) -> Response:
     if not auth.user.admin:
         raise HTTPException(403)
 
-    print("hiddening")
     await request.state.db.hide_moot(id)
 
     return Response()
