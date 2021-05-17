@@ -51,6 +51,10 @@ nav .user img {
   border-radius: 50%;
 }
 
+.welcome {
+  text-align: center;
+}
+
 .sticky {
   position: fixed;
   top: 0;
