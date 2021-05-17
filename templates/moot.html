@@ -14,7 +14,7 @@
     {% endautoescape %}
   </p>
   <p class="length">
-    Moot length: {{ moot.moot.content|length }} -- {{ moot.moot.human_time }} -- {{ moot.moot.id }}
+    Moot length: {{ moot.moot.content|length }} -- {{ moot.moot.human_time }} -- <span><a href="/moots/{{ moot.moot.id }}">Direct Link</a></span>
   </p>
 </div>
 {% endmacro %}
