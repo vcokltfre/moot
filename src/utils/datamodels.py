@@ -36,6 +36,12 @@ class Moot:
     def human_time(self) -> str:
         return get_datetime(self.id).strftime("%Y-%m-%d at %H:%M:%S")
 
+    @property
+    def _content(self) -> str:
+        if self.hide:
+            return "The content of this post has been hidden by the Moot moderation team."
+        return self.content
+
 
 @dataclass
 class Session:
