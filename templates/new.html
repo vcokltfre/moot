@@ -35,7 +35,21 @@
     if (len < 280) {
       betterAlert(`Your post is too short! It needs to be at least 280 characters!`);
     } else {
-      button.innerHTML = `Post! (${len})`;
+      fetch("/new/post", {
+        method: "POST",
+        body: JSON.stringify({
+          content: text.value
+        })
+      }).then((resp) => {
+        if (resp.status == 200) {
+          data = resp.json().then((data) => {
+            betterAlert(`Success! Your post has been created with the ID: ${data.id}`);
+            window.location.replace(`/moots/${data.id}`);
+          })
+        } else {
+          betterAlert("Oh no! Something went wrong while processing your request!")
+        }
+      })
     }
   }
 </script>

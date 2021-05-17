@@ -4,6 +4,7 @@ from datetime import datetime
 from dataclasses import dataclass, field
 
 from fastapi.responses import RedirectResponse
+from pydantic import BaseModel
 
 from .ids import get_datetime
 
@@ -56,3 +57,7 @@ class AuthState:
 class ResolvedMoot:
     user: User
     moot: Moot
+
+
+class NewPost(BaseModel):
+    content: str

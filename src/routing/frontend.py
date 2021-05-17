@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi.exceptions import HTTPException
+from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
 
-from src.utils.ids import get_datetime
-from src.utils.datamodels import ResolvedMoot
+from src.utils.datamodels import ResolvedMoot, NewPost
 
 
 router = APIRouter()
@@ -42,7 +42,7 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
         "userid": user.id,
         "avatar_url": user.avatar_url,
         "moots": [ResolvedMoot(user, moot) for moot in moots],
-    })@router.get("/users/{userid}")
+    })
 
 @router.get("/new")
 async def new(request: Request) -> HTMLResponse:
@@ -59,3 +59,23 @@ async def new(request: Request) -> HTMLResponse:
         "userid": user.id,
         "avatar_url": user.avatar_url,
     })
+
+@router.post("/new/post")
+async def new_post(data: NewPost, request: Request) -> dict:
+    auth = request.state.auth
+
+    if not auth.user:
+        raise HTTPException(403, "Not authorized.")
+
+    user = auth.user
+
+    if len(data.content) < 280:
+        raise HTTPException(400, "Bad content. Content too short!")
+
+    id = request.state.ids.next()
+
+    await request.state.db.create_moot(id, user.id, data.content)
+
+    return {
+        "id": id,
+    }
