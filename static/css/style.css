@@ -128,4 +128,56 @@ nav .user img {
   box-shadow: 0.01rem 0.01rem 0.1rem black;
 }
 
+.new-box {
+  background: #121212;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.new-box textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  background: #87ceeb;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+}
+.new-box button {
+  background: #87ceeb;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(calc(100% + 1rem));
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100% + 1rem));
+    opacity: 0;
+  }
+}
+.modal {
+  position: fixed;
+  display: inline;
+  padding: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  background: #87ceeb;
+  color: black;
+  white-space: pre-wrap;
+  animation: slide-in 5s ease-in-out 0ms 1 forwards;
+  border-radius: 8px;
+}
+
 /*# sourceMappingURL=style.css.map */

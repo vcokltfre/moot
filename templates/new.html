@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% from 'moot.html' import makemoot %}
+{% block title %}{{ username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="main">
+  <div class="moots">
+    <div class="new-box">
+      <textarea id="textinput" onkeypress="keypress()" wrap="hard"></textarea>
+      <button id="post" onclick="post()">0 < 280</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  text = document.getElementById("textinput");
+  text.value = ""
+
+  function keypress() {
+    button = document.getElementById("post");
+    len = text.value.length;
+
+    if (len < 280) {
+      button.innerHTML = `${len} < 280`;
+    } else {
+      button.innerHTML = `Post! (${len})`;
+    }
+  }
+
+  function post() {
+    len = text.value.length;
+
+    if (len < 280) {
+      betterAlert(`Your post is too short! It needs to be at least 280 characters!`);
+    } else {
+      button.innerHTML = `Post! (${len})`;
+    }
+  }
+</script>
+{% endblock %}

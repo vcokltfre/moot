@@ -42,4 +42,20 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
         "userid": user.id,
         "avatar_url": user.avatar_url,
         "moots": [ResolvedMoot(user, moot) for moot in moots],
+    })@router.get("/users/{userid}")
+
+@router.get("/new")
+async def new(request: Request) -> HTMLResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    return templates.TemplateResponse("new.html", {
+        "request": request,
+        "username": user.username,
+        "userid": user.id,
+        "avatar_url": user.avatar_url,
     })

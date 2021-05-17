@@ -40,4 +40,12 @@
       navbar.classList.remove("sticky");
     }
   }
+
+  function betterAlert(message) {
+    const el = document.createElement("div");
+    el.classList.add("modal");
+    el.innerText = message;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5000);
+  }
 </script>
