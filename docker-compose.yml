@@ -5,5 +5,16 @@ services:
     build: .
     restart: always
     ports:
-      - 1991:8000
+      - 80:8000
     env_file: .env
+    links:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+      POSTGRES_DB: moot
+    ports:
+      - 5432:5432
