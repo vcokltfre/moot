@@ -9,7 +9,9 @@
     </a>
   </div>
   <p class="content">
-    {{ moot.moot._content }}
+    {% autoescape false %}
+    {{ moot.moot._content | e | replace("\n", "<br>") }}
+    {% endautoescape %}
   </p>
   <p class="length">
     Moot length: {{ moot.moot.content|length }} -- {{ moot.moot.human_time }} -- {{ moot.moot.id }}
