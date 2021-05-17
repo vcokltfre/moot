@@ -14,7 +14,38 @@
     {% endautoescape %}
   </p>
   <p class="length">
-    Moot length: {{ moot.moot.content|length }} -- {{ moot.moot.human_time }} -- <span><a href="/moots/{{ moot.moot.id }}">Direct Link</a></span>
+    Moot length: {{ moot.moot.content|length }} --
+    {{ moot.moot.human_time }} --
+    <span><a href="/moots/{{ moot.moot.id }}">Direct Link</a></span>
+    {%- if moot.user.admin %}
+    -- <button onclick="del('{{ moot.moot.id }}')">Delete</button>
+    -- <button onclick="hide('{{ moot.moot.id }}')">Hide</button>
+    {% endif -%}
   </p>
 </div>
+
+<script>
+  function del(moot) {
+    fetch(`/moots/${moot}`, {
+        method: "DELETE"
+      }).then((resp) => {
+        if (resp.status == 200) {
+          betterAlert("Post deleted successfully.");
+        } else {
+          betterAlert("Oh no! Something went wrong while processing your request!")
+        }
+      })
+    }
+  function hide(moot) {
+    fetch(`/moots/${moot}`, {
+        method: "PATCH"
+      }).then((resp) => {
+        if (resp.status == 200) {
+          betterAlert("Post hidden successfully.");
+        } else {
+          betterAlert("Oh no! Something went wrong while processing your request!")
+        }
+      })
+    }
+</script>
 {% endmacro %}

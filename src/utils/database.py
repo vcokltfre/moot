@@ -206,3 +206,21 @@ class Database:
         created_moot = await self.pool.fetchrow("INSERT INTO Moots (id, author_id, content) VALUES ($1, $2, $3) RETURNING *;", id, author_id, content)
 
         return Moot(**dict(created_moot))
+
+    async def delete_moot(self, id: int) -> None:
+        """Delete a Moot.
+
+        Args:
+            id (int): The ID of the Moot to delete.
+        """
+
+        await self.pool.execute("DELETE FROM Moots WHERE id = $1;", id)
+
+    async def hide_moot(self, id: int) -> None:
+        """Hide a Moot.
+
+        Args:
+            id (int): The ID of the moot to hide.
+        """
+
+        await self.pool.execute("UPDATE Moots SET hide = true WHERE id = $1;", id)

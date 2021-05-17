@@ -76,6 +76,35 @@ async def get_userpage(id: int, request: Request) -> HTMLResponse:
         "moot": ResolvedMoot(user, moot),
     })
 
+@router.delete("/moots/{id}")
+async def delete_moot(id: int, request: Request) -> Response:
+    auth = request.state.auth
+
+    if not auth.user:
+        raise HTTPException(403)
+
+    if not auth.user.admin:
+        raise HTTPException(403)
+
+    await request.state.db.delete_moot(id)
+
+    return Response()
+
+@router.patch("/moots/{id}")
+async def hide_moot(id: int, request: Request) -> Response:
+    auth = request.state.auth
+
+    if not auth.user:
+        raise HTTPException(403)
+
+    if not auth.user.admin:
+        raise HTTPException(403)
+
+    print("hiddening")
+    await request.state.db.hide_moot(id)
+
+    return Response()
+
 @router.get("/new")
 async def new(request: Request) -> HTMLResponse:
     auth = request.state.auth

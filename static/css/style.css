@@ -88,6 +88,12 @@ nav .user img {
   margin-bottom: 10px;
   transition: box-shadow 300ms, transform 5s;
 }
+.moot button {
+  border: none;
+  background: #87ceeb;
+  color: #111;
+  border-radius: 8px;
+}
 .moot .moot-header {
   padding-top: 1rem;
   padding-left: 1rem;

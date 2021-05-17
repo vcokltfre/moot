@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
+from .bitfield import BitField
 from .ids import get_datetime
 
 
@@ -21,6 +22,14 @@ class User:
     @property
     def avatar_url(self) -> str:
         return f"https://cdn.discordapp.com/avatars/{self.id}/{self.avatar_hash}"
+
+    @property
+    def bits(self) -> BitField:
+        return BitField(self.flags)
+
+    @property
+    def admin(self) -> bool:
+        return bool(self.bits[0])
 
 
 @dataclass
