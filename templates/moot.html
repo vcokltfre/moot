@@ -1,5 +1,5 @@
 {% macro makemoot(moot, logged_in_user) %}
-<div class="moot">
+<div class="moot" id={{ moot.moot.id }}>
   <div class="moot-header">
     <a href="/users/{{ moot.user.id }}">
       <div class="avatar">
@@ -8,7 +8,7 @@
       <span class="username">{{ moot.user.username }}</span>
     </a>
   </div>
-  <p class="content">
+  <p class="content" id="content-{{ moot.moot.id }}">
     {% autoescape false %}
     {{ moot.moot._content | e | replace("\n", "<br>") }}
     {% endautoescape %}
@@ -31,6 +31,7 @@
       }).then((resp) => {
         if (resp.status == 200) {
           betterAlert("Post deleted successfully.");
+          document.getElementById(moot).remove();
         } else {
           betterAlert("Oh no! Something went wrong while processing your request!")
         }
@@ -42,6 +43,7 @@
       }).then((resp) => {
         if (resp.status == 200) {
           betterAlert("Post hidden successfully.");
+          document.getElementById(`content-${moot}`).innerText = "The content of this post has been hidden by the Moot moderation team.";
         } else {
           betterAlert("Oh no! Something went wrong while processing your request!")
         }
