@@ -58,7 +58,7 @@ async def get_userpage(id: int, request: Request) -> HTMLResponse:
 
         return templates.TemplateResponse("og.html", {
             "request": request,
-            "desc": moot.content[:140],
+            "desc": moot.content[:140] + "...",
         })
 
     if not auth.user:
