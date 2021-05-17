@@ -53,6 +53,14 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 async def get_userpage(id: int, request: Request) -> HTMLResponse:
     auth = request.state.auth
 
+    if "discord" in request.headers.get("User-Agent", "").lower():
+        moot = await request.state.db.get_moot(id)
+
+        return templates.TemplateResponse("og.html", {
+            "request": request,
+            "desc": moot.content[:140],
+        })
+
     if not auth.user:
         return auth.request_auth()
 
