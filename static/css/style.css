@@ -55,6 +55,14 @@ nav .user img {
   text-align: center;
 }
 
+.newmoot {
+  margin-left: 1rem;
+  padding: 6px;
+  background: #87ceeb;
+  color: #111;
+  border-radius: 6px;
+}
+
 .sticky {
   position: fixed;
   top: 0;
