@@ -40,13 +40,14 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
 
     user = auth.user
     moots = await request.state.db.get_recent_moots(userid, 15)
+    moot_user = await request.state.db.get_user(userid)
 
     return templates.TemplateResponse("user.html", {
         "request": request,
         "username": user.username,
         "userid": user.id,
         "avatar_url": user.avatar_url,
-        "moots": [ResolvedMoot(user, moot) for moot in moots],
+        "moots": [ResolvedMoot(moot_user, moot) for moot in moots],
     })
 
 @router.get("/moots/{id}")
