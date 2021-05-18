@@ -77,7 +77,7 @@ class ResolvedMoot:
     @property
     def content(self) -> str:
         if self.use_sample:
-            return self.moot._content[:1024] + "..."
+            return "\n".join(self.moot._content[:1024].split("\n")[:20]) + "..."
         return self.moot._content
 
 
