@@ -24,6 +24,8 @@
 
     if (len < 280) {
       button.innerHTML = `${len} < 280`;
+    } else if (len > 32000) {
+      button.innerHTML = `${len} > 32000`;
     } else {
       button.innerHTML = `Post! (${len})`;
     }
