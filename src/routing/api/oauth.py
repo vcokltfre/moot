@@ -13,7 +13,7 @@ async def auth_callback(request: Request) -> RedirectResponse:
     user = await get_user_details(request.state.session, request.query_params["code"])
 
     userid = int(user["id"])
-    username = user["username"] + user["discriminator"]
+    username = user["username"] + "#" + user["discriminator"]
     avatar = user.get("avatar", None)
 
     session = await request.state.db.user_login(userid, username, avatar)
