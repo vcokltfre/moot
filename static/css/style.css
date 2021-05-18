@@ -141,9 +141,10 @@ nav .user img {
   margin-bottom: 10px;
   background: #87ceeb;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 16px;
   height: 24rem;
+  outline-width: 0;
 }
 .new-box button {
   background: #87ceeb;
