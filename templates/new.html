@@ -34,6 +34,8 @@
 
     if (len < 280) {
       betterAlert(`Your post is too short! It needs to be at least 280 characters!`);
+    } else if (len > 32000) {
+      betterAlert(`Your post is too long! It needs to be at most 32000 characters!`);
     } else {
       fetch("/new/post", {
         method: "POST",
