@@ -18,6 +18,8 @@
   text = document.getElementById("textinput");
   text.value = ""
 
+  text.addEventListener('paste', e => e.preventDefault());
+
   function keypress() {
     button = document.getElementById("post");
     len = text.value.length;
