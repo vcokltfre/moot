@@ -32,6 +32,10 @@ class User:
         return bool(self.bits[0])
 
     @property
+    def can_paste(self) -> bool:
+        return bool(self.bits[1])
+
+    @property
     def userbio(self) -> str:
         return self.bio or "This user has no bio."
 

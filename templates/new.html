@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from 'moot.html' import makemoot %}
-{% block title %}{{ username }}{% endblock %}
+{% block title %}New{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
@@ -18,7 +18,9 @@
   text = document.getElementById("textinput");
   text.value = ""
 
+  {%- if not user.can_paste %}
   text.addEventListener('paste', e => e.preventDefault());
+  {% endif -%}
 
   function keypress() {
     button = document.getElementById("post");
