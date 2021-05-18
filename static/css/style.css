@@ -40,6 +40,22 @@ nav a img {
   width: auto;
   border-radius: 50%;
 }
+nav .newmoot {
+  margin-left: 1rem;
+  padding: 6px;
+  background: #87ceeb;
+  color: #111;
+  border-radius: 12px;
+}
+nav .search {
+  margin-left: 1rem;
+  padding: 8px;
+  background: #87ceeb;
+  color: #111;
+  border-radius: 12px;
+  outline-width: 0;
+  border: none;
+}
 nav .user {
   display: flex;
   align-items: center;
@@ -49,14 +65,6 @@ nav .user img {
   height: 3rem;
   width: auto;
   border-radius: 50%;
-}
-
-.newmoot {
-  margin-left: 1rem;
-  padding: 6px;
-  background: #87ceeb;
-  color: #111;
-  border-radius: 6px;
 }
 
 .sticky {

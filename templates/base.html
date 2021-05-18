@@ -15,6 +15,7 @@
       <a class="brand" href="/"><img src="/static/images/moot.png"></a>
       <ul>
         <li><a class="newmoot" href="/new">New Moot</a></li>
+        <li><input id="search" class="search" type="text" placeholder="Search..."></li>
       </ul>
       <a href="/users/{{ user.id }}" class="user">
         <span>{{ user.username|e }}</span>
@@ -27,12 +28,25 @@
 </html>
 
 <script>
+  searchInput = document.getElementById("search");
+  searchInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      search();
+    }
+  });
+
   function betterAlert(message) {
     const el = document.createElement("div");
     el.classList.add("modal");
     el.innerText = message;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 5000);
+  }
+
+  function search() {
+    content = searchInput.value;
+    window.location.href = `/search?q=${content}`;
   }
 
   function del(moot) {
@@ -43,7 +57,7 @@
         betterAlert("Post deleted successfully.");
         document.getElementById(moot).remove();
       } else {
-        betterAlert("Oh no! Something went wrong while processing your request!")
+        betterAlert("Oh no! Something went wrong while processing your request!");
       }
     })
   }
@@ -56,7 +70,7 @@
         betterAlert("Post hidden successfully.");
         document.getElementById(`content-${moot}`).innerText = "The content of this post has been hidden by the Moot moderation team.";
       } else {
-        betterAlert("Oh no! Something went wrong while processing your request!")
+        betterAlert("Oh no! Something went wrong while processing your request!");
       }
     })
   }
