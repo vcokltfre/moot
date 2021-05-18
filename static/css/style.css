@@ -143,6 +143,7 @@ nav .user img {
   border: none;
   border-radius: 8px;
   padding: 16px;
+  height: 24rem;
 }
 .new-box button {
   background: #87ceeb;
