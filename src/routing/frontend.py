@@ -133,3 +133,20 @@ async def new_post(data: NewPost, request: Request) -> dict:
     return {
         "id": id,
     }
+
+@router.get("/search")
+async def new(q: str, request: Request) -> HTMLResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    users = await request.state.db.search_users(q)
+
+    return templates.TemplateResponse("search.html", {
+        "request": request,
+        "user": user,
+        "users": users,
+    })

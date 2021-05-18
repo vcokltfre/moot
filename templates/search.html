@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from 'usr.html' import makeuser %}
+{% block title %}{{ username }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="main">
+  <div class="moots">
+    {% for user in users -%}
+      {{ makeuser(user) }}
+    {%- endfor %}
+  </div>
+</div>
+{% endblock %}

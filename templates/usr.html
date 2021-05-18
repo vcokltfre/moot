@@ -1,0 +1,17 @@
+{% macro makeuser(user) %}
+<div class="moot">
+  <div class="moot-header">
+    <a href="/users/{{ user.id }}">
+      <div class="avatar">
+        <img src="{{ user.avatar_url }}">
+      </div>
+      <span class="username">{{ user.username }}</span>
+    </a>
+  </div>
+  <p class="content">
+    {% autoescape false %}
+    {{ user.userbio | e | replace("\n", "<br>") }}
+    {% endautoescape %}
+  </p>
+</div>
+{% endmacro %}

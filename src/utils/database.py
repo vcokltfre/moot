@@ -224,3 +224,17 @@ class Database:
         """
 
         await self.pool.execute("UPDATE Moots SET hide = true WHERE id = $1;", id)
+
+    async def search_users(self, query: str) -> List[User]:
+        """Search for users matching a given pattern.
+
+        Args:
+            query (str): The query pattern to search for.
+
+        Returns:
+            List[User]: The users found by the query.
+        """
+
+        raw_users = await self.pool.fetch("SELECT * FROM Users WHERE username LIKE $1;", f"%{query}%")
+
+        return [User(**dict(raw_user)) for raw_user in raw_users]
