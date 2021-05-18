@@ -1,3 +1,5 @@
+from os import getenv
+
 from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, Response
@@ -13,6 +15,13 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/")
 async def get_index(request: Request) -> HTMLResponse:
     auth = request.state.auth
+
+    if "discord" in request.headers.get("User-Agent", "").lower():
+        return templates.TemplateResponse("og.html", {
+            "request": request,
+            "desc": "A social media platform with a twist: a minimum post length!",
+            "image": getenv("BASE_URL") + "/static/images/moot.png",
+        })
 
     if not auth.user:
         return auth.request_auth()
