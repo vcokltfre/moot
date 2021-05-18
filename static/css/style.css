@@ -9,13 +9,13 @@
 }
 
 body {
-  background: #1f1f1f;
+  background: #2b2b2b;
   margin: 0;
 }
 
 nav {
   padding: 0.75rem;
-  background: #121212;
+  background: #1f1f1f;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -90,7 +90,7 @@ nav .user img {
 }
 
 .moot {
-  background: #121212;
+  background: #1f1f1f;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 10px;
@@ -135,11 +135,11 @@ nav .user img {
   color: #16759b;
 }
 .moot:hover {
-  box-shadow: 0.01rem 0.01rem 0.1rem black;
+  box-shadow: 0.01rem 0.01rem 0.1rem #050505;
 }
 
 .new-box {
-  background: #121212;
+  background: #1f1f1f;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 10px;
