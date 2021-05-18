@@ -8,7 +8,7 @@
 <div class="main">
   <div class="moots">
     <div class="new-box">
-      <textarea id="textinput" onkeypress="keypress()" wrap="hard"></textarea>
+      <textarea id="textinput" onkeypress="keypress()" wrap="hard" placeholder="Start typing a new Moot..."></textarea>
       <button id="post" onclick="post()">0 < 280</button>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
   text = document.getElementById("textinput");
-  text.value = "Start typing a new Moot..."
+  text.value = ""
 
   function keypress() {
     button = document.getElementById("post");
