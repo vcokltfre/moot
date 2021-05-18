@@ -68,7 +68,7 @@ async def get_userpage(id: int, request: Request) -> HTMLResponse:
 
     return templates.TemplateResponse("viewmoot.html", {
         "request": request,
-        "user": user,
+        "user": auth.user,
         "moot": ResolvedMoot(user, moot),
     })
 

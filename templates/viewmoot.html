@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from 'moot.html' import makemoot %}
-{% block title %}{{ username }}{% endblock %}
+{% block title %}{{ user.username }}{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
