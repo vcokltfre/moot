@@ -4,6 +4,8 @@ from fastapi import FastAPI, Request, Response
 from dotenv import load_dotenv
 from aiohttp import ClientSession
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from starlette.exceptions import HTTPException
 
 from src.utils.ids import IDGenerator
 from src.utils.database import Database
@@ -18,6 +20,7 @@ app.mount("/static", StaticFiles(directory="static"), "static")
 app.include_router(frontend_router)
 app.include_router(api_router)
 
+templates = Jinja2Templates(directory="templates")
 session = ClientSession()
 db = Database()
 ids = IDGenerator()
@@ -47,6 +50,14 @@ async def authorize(request: Request, call_next) -> Response:
     request.state.auth = await db.get_auth(session)
 
     return await call_next(request)
+
+@app.exception_handler(HTTPException)
+async def handler(request: Request, exc: HTTPException) -> Response:
+    if exc.status_code == 404:
+        return templates.TemplateResponse("404.html", {
+            "request": request,
+        })
+    return Response(exc.detail, exc.status_code)
 
 @app.get("/ping")
 async def ping() -> dict:
