@@ -10,7 +10,7 @@
   </div>
   <p class="content" id="content-{{ moot.moot.id }}">
     {% autoescape false %}
-    {{ moot.moot._content | e | replace("\n", "<br>") }}
+    {{ moot.content | e | replace("\n", "<br>") }}
     {% endautoescape %}
   </p>
   <p class="length">

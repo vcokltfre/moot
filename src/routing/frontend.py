@@ -26,7 +26,7 @@ async def get_index(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("index.html", {
         "request": request,
         "user": user,
-        "moots": [ResolvedMoot(users[moot.author_id], moot) for moot in moots],
+        "moots": [ResolvedMoot(users[moot.author_id], moot, use_sample=True) for moot in moots],
     })
 
 @router.get("/users/{userid}")

@@ -72,6 +72,13 @@ class AuthState:
 class ResolvedMoot:
     user: User
     moot: Moot
+    use_sample: bool = False
+
+    @property
+    def content(self) -> str:
+        if self.use_sample:
+            return self.moot._content[:1024] + "..."
+        return self.moot._content
 
 
 class NewPost(BaseModel):
