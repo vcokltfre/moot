@@ -4,7 +4,7 @@ from datetime import datetime
 from dataclasses import dataclass, field
 
 from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, constr
 
 from .bitfield import BitField
 from .ids import get_datetime
@@ -86,4 +86,4 @@ class ResolvedMoot:
 
 
 class NewPost(BaseModel):
-    content: str
+    content: constr(max_length=32000)
