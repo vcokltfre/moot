@@ -39,6 +39,15 @@ class User:
     def userbio(self) -> str:
         return self.bio or "This user has no bio."
 
+    @property
+    def serialised(self) -> dict:
+        return dict(
+            id=self.id,
+            username=self.username,
+            flags=self.flags,
+            banned=self.banned,
+        )
+
 
 @dataclass
 class Moot:

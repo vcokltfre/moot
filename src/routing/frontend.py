@@ -2,7 +2,7 @@ from os import getenv
 
 from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from src.utils.datamodels import ResolvedMoot, NewPost
@@ -159,3 +159,81 @@ async def new(q: str, request: Request) -> HTMLResponse:
         "user": user,
         "users": users,
     })
+
+@router.get("/moderation")
+async def moderation(request: Request) -> HTMLResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    if not user.admin:
+        raise HTTPException(403, "You're not allowed to access this page!")
+
+    return templates.TemplateResponse("moderation.html", {
+        "request": request,
+        "user": user,
+    })
+
+@router.get("/moderation/{user_id}")
+async def get_user_details(request: Request, user_id: int) -> JSONResponse:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    if not user.admin:
+        raise HTTPException(403, "You're not allowed to access this resource!")
+
+    req_user = await request.state.db.get_user(user_id)
+
+    if not req_user:
+        raise HTTPException(404)
+
+    return req_user.serialised
+
+@router.post("/moderation/{user_id}/ban")
+async def ban_user(request: Request, user_id: int) -> Response:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    if not user.admin:
+        raise HTTPException(403, "You're not allowed to access this resource!")
+
+    req_user = await request.state.db.get_user(user_id)
+
+    if not req_user:
+        raise HTTPException(404)
+
+    await request.state.db.set_banned(user_id, True)
+
+    return Response(status_code=200)
+
+@router.post("/moderation/{user_id}/unban")
+async def unban_user(request: Request, user_id: int) -> Response:
+    auth = request.state.auth
+
+    if not auth.user:
+        return auth.request_auth()
+
+    user = auth.user
+
+    if not user.admin:
+        raise HTTPException(403, "You're not allowed to access this resource!")
+
+    req_user = await request.state.db.get_user(user_id)
+
+    if not req_user:
+        raise HTTPException(404)
+
+    await request.state.db.set_banned(user_id, False)
+
+    return Response(status_code=200)

@@ -238,3 +238,13 @@ class Database:
         raw_users = await self.pool.fetch("SELECT * FROM Users WHERE username LIKE $1;", f"%{query}%")
 
         return [User(**dict(raw_user)) for raw_user in raw_users]
+
+    async def set_banned(self, user_id: int, state: bool) -> None:
+        """Ban or unban a user.
+
+        Args:
+            user_id (int): The user to action.
+            state (bool): The ban state to set.
+        """
+
+        await self.pool.execute("UPDATE Users SET banned = $1 WHERE id = $2;", state, user_id)

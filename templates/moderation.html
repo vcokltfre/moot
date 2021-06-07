@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Moderation{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="main">
+  <div class="moots">
+    <div class="moot">
+      <h2 style="text-align: center;">User Control</h2>
+      <input type="text" placeholder="User ID" id="user-input"><br/>
+      <button onclick="lookup()">Lookup</button><br/>
+      <div class="user-lookup">
+        <div id="userid"></div>
+        <div id="username"></div>
+        <div id="flags"></div>
+        <div id="banned"></div>
+        <button onclick="ban()">Ban</button>
+        <button onclick="unban()">Unban</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  uid = document.getElementById("userid");
+  uname = document.getElementById("username");
+  flags = document.getElementById("flags");
+  banned = document.getElementById("banned");
+  element = document.getElementById("user-input");
+
+  function lookup() {
+    url = `/moderation/${element.value}`
+
+    fetch(url).then((response) => {
+      if (response.status !== 200) {
+        return betterAlert(`Something went wrong while handling the request: ${response.status}`);
+      }
+      response.json().then((data) => {
+        uid.innerHTML = "User ID: " + data.id;
+        uname.innerHTML = "Username: " + data.username;
+        flags.innerHTML = "Flags: " + data.flags;
+        banned.innerHTML = "Banned: " + data.banned;
+      })
+    })
+  }
+
+  function ban() {
+    url = `/moderation/${element.value}/ban`;
+    fetch(url, {method: 'POST'})
+  }
+  function unban() {
+    url = `/moderation/${element.value}/unban`;
+    fetch(url, {method: 'POST'})
+  }
+</script>
+{% endblock %}
