@@ -49,7 +49,6 @@ class User:
             banned=self.banned,
         )
 
-    @property
     def raise_banned(self) -> None:
         if self.banned and not self.admin: raise HTTPException(403, "You are banned.")
 
