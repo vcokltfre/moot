@@ -18,10 +18,6 @@
   text = document.getElementById("textinput");
   text.value = ""
 
-  {%- if not user.can_paste %}
-  text.addEventListener('paste', e => e.preventDefault());
-  {% endif -%}
-
   function keypress() {
     button = document.getElementById("post");
     len = text.value.length;
@@ -60,5 +56,9 @@
       })
     }
   }
+
+  {%- if not user.can_paste %}
+  text.addEventListener('paste', e => e.preventDefault());
+  {% endif -%}
 </script>
 {% endblock %}
