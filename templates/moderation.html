@@ -47,11 +47,11 @@
 
   function ban() {
     url = `/moderation/${element.value}/ban`;
-    fetch(url, {method: 'POST'})
+    fetch(url, {method: 'POST'}).then(() => {lookup()})
   }
   function unban() {
     url = `/moderation/${element.value}/unban`;
-    fetch(url, {method: 'POST'})
+    fetch(url, {method: 'POST'}).then(() => {lookup()})
   }
 </script>
 {% endblock %}
