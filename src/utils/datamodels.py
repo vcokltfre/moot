@@ -3,6 +3,7 @@ from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
 
+from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, constr
 
@@ -47,6 +48,10 @@ class User:
             flags=self.flags,
             banned=self.banned,
         )
+
+    @property
+    def raise_banned(self) -> None:
+        if self.banned and not self.admin: raise HTTPException(403, "You are banned.")
 
 
 @dataclass

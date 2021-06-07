@@ -27,6 +27,7 @@ async def get_index(request: Request) -> HTMLResponse:
         return auth.request_auth()
 
     user = auth.user
+    user.raise_banned()
 
     moots = await request.state.db.get_all_recent_moots(15)
     users = await request.state.db.get_users(list(set([moot.author_id for moot in moots])))
@@ -46,6 +47,7 @@ async def get_userpage(userid: int, request: Request) -> HTMLResponse:
         return auth.request_auth()
 
     user = auth.user
+    user.raise_banned()
     moots = await request.state.db.get_recent_moots(userid, 15)
     moot_user = await request.state.db.get_user(userid)
 
@@ -71,6 +73,8 @@ async def get_userpage(id: int, request: Request) -> HTMLResponse:
 
     if not auth.user:
         return auth.request_auth()
+
+    auth.user.raise_banned()
 
     moot = await request.state.db.get_moot(id)
     user = await request.state.db.get_user(moot.author_id)
@@ -117,6 +121,7 @@ async def new(request: Request) -> HTMLResponse:
         return auth.request_auth()
 
     user = auth.user
+    user.raise_banned()
 
     return templates.TemplateResponse("new.html", {
         "request": request,
@@ -131,6 +136,7 @@ async def new_post(data: NewPost, request: Request) -> dict:
         raise HTTPException(403, "Not authorized.")
 
     user = auth.user
+    user.raise_banned()
 
     if len(data.content) < 280:
         raise HTTPException(400, "Bad content. Content too short!")
@@ -151,6 +157,7 @@ async def new(q: str, request: Request) -> HTMLResponse:
         return auth.request_auth()
 
     user = auth.user
+    user.raise_banned()
 
     users = await request.state.db.search_users(q)
 
